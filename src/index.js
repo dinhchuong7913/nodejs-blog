@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   express.urlencoded({
     extended: true,
-  }),
+  })
 );
 app.use(express.json());
 
@@ -19,10 +19,10 @@ app.use(morgan('combined'));
 
 //Template engine
 app.engine(
-       'hbs',
+  'hbs',
   handlebars.engine({
     extname: '.hbs',
-  }),
+  })
 );
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
@@ -31,6 +31,10 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 const routes = require('./routes');
 routes(app);
 
+// Connect db
+const db = require('./config/db');
+db.connect();
+
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });
