@@ -6,7 +6,7 @@
         <th scope="col">#</th>
         <th scope="col">Tên khoá học</th>
         <th scope="col">Trình độ</th>
-        <th scope="col">Thời gian tạo</th>
+        <th scope="col">Thời gian cập nhật</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -16,13 +16,33 @@
         <th scope="row">{{sum @index 1}}</th>
         <td>{{this.name}}</td>
         <td>{{this.level}}</td>
-        <td>{{this.createdAt}}</td>
+        <td>{{this.updatedAt}}</td>
         <td>
           <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
-          <a href="/courses/{{this._id}}/edit" class="btn btn-link">Xoá</a>
+          <a href="/courses/{{this._id}}/edit" data-toggle="modal" data-target="#deleteCourse"  class="btn btn-link">Xoá</a>
         </td>
       <tr>
       {{/each}}
     </tbody>
   </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="deleteCourse" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa khóa học</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc muốn xóa khóa học này?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
