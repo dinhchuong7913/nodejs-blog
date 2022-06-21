@@ -19,7 +19,7 @@
         <td>{{this.updatedAt}}</td>
         <td>
           <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
-          <a href="/courses/{{this._id}}/edit" data-toggle="modal" data-target="#deleteCourse"  class="btn btn-link">Xoá</a>
+          <a href="/courses/{{this._id}}/edit" data-toggle="modal" data-id="{{this._id}}" data-target="#deleteCourse"  class="btn btn-link">Xoá</a>
         </td>
       <tr>
       {{/each}}
@@ -40,9 +40,26 @@
         Bạn có chắc muốn xóa khóa học này?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-danger" id="btnDelete">Xóa</button>
       </div>
     </div>
   </div>
 </div>
+<form name="form_delete" method="post"></form>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var id;
+    var deleteForm = document.forms['form_delete'];
+    $('#deleteCourse').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      id = button.data('id');
+      var btnDelete = document.getElementById('btnDelete');
+      btnDelete.onclick = function(){
+        deleteForm.action = '/courses/'+id+'?_method=DELETE';
+        deleteForm.submit();
+      };
+    });
+  });
+  
+</script>
